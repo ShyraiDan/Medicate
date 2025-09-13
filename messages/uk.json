@@ -197,7 +197,17 @@
         "historyAppointments": "Попередні прийоми",
         "noAppointments": "Немає записів на прийом"
       },
-      "doctor": {},
+      "doctor": {
+        "title": "Ваш профіль",
+        "appointments": "Прийоми",
+        "calendar": "Календар",
+        "speciality": "Спеціалізація",
+        "todaysAppointments": "Прийоми на сьогодні",
+        "noAppointments": "Немає прийомів ",
+        "appointmentReason": "Причина візиту",
+        "appointmentDetails": "Додаткові деталі",
+        "moveToVisit": "До візиту"
+      },
       "personalInfo": "Особисті дані",
       "dateOfBirth": "Дата народження",
       "phoneNumber": "Номер телефону",

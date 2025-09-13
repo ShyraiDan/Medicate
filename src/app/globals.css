@@ -35,6 +35,10 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* shadow */
+  --inset-shadow-doctor-card: 5px 5px 50px 0px oklch(0.2295 0.0522 249.16 / 10.98%);
+  --inset-shadow-profile: 4px 0 8px -4px oklch(0.5443 0.0241 241.67 / 18.04%);
 }
 
 :root {
