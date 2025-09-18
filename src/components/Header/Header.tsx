@@ -133,12 +133,12 @@ export const Header = ({ session }: HeaderProps) => {
               {isPatient && (
                 <>
                   <HeaderLink
-                    href={`/mycabinet/patient/${session.user.id}?tab=appointments`}
+                    href={`/patient/${session.user.id}?tab=appointments`}
                     label='links.appointment'
                     currentPath={path}
                   />
                   <HeaderLink
-                    href={`/mycabinet/patient/${session.user.id}?tab=analyzes`}
+                    href={`/patient/${session.user.id}?tab=analyzes`}
                     label='links.analyzes'
                     currentPath={path}
                   />
@@ -156,7 +156,7 @@ export const Header = ({ session }: HeaderProps) => {
               <LanguageModal />
             </div>
             {session ? (
-              <Link href={`/mycabinet/${session.user.role}/${session.user.id}?tab=appointments`}>
+              <Link href={`/${session.user.role}/${session.user.id}?tab=appointments`}>
                 {/* {session.image ? (
                   <Image
                     src={`${BUCKET_URL}/custom/avatars/${session.image}`}

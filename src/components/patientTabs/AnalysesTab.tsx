@@ -2,21 +2,23 @@
 
 import { Plus } from 'lucide-react'
 import { useParams } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { useTranslations } from 'next-intl'
 
+import { useGetAnalysisQuery } from '@/client/analysis'
 import { AnalysisCard } from '@/components/AnalysisCard/AnalysisCard'
 import { SkeletonText } from '@/components/skeletons/SkeletonText'
 import { StyledLinkButton } from '@/components/ui/styledLinkButton'
 import { P, H6 } from '@/components/ui/typography'
-import { mockedAnalyses } from '@/mocks/mockedAnalyses'
 import { SupportedLocales } from '@/shared/types'
 
 export const AnalysesTab = () => {
+  const { data: session } = useSession()
+
   const params = useParams()
   const { locale } = params
 
-  const analyses = mockedAnalyses
-  const isLoading = false
+  const { data: analyses, isLoading } = useGetAnalysisQuery(session?.user?.id || '')
 
   const t = useTranslations('page')
 

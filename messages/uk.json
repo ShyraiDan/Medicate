@@ -472,7 +472,11 @@
       "visitCreateSuccess": "Візит успішно створено",
       "visitUpdateSuccess": "Візит успішно оновлено",
       "visitCreateError": "Помилка створення візиту",
-      "visitUpdateError": "Помилка оновлення візиту"
+      "visitUpdateError": "Помилка оновлення візиту",
+      "analysisCreateSuccess": "Аналіз успішно створено",
+      "analysisUpdateSuccess": "Аналіз успішно оновлено",
+      "analysisCreateError": "Помилка створення аналізу",
+      "analysisUpdateError": "Помилка оновлення аналізу"
     },
     "validation": {
       "userExists": "Користувач вже існує",
@@ -495,7 +499,9 @@
       "startTimeRequired": "Дата початку візиту є обов'язковою",
       "doctorIdRequired": "Лікар є обов'язковим",
       "specialtyRequired": "Спеціальність є обов'язковою",
-      "startTimeHoursRequired": "Час початку візиту є обов'язковим"
+      "startTimeHoursRequired": "Час початку візиту є обов'язковим",
+      "analysisNameRequired": "Назва аналізу є обов'язковою",
+      "analysisDateRequired": "Дата аналізу є обов'язковою"
     }
   },
   "modals": {

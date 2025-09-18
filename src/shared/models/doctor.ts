@@ -1,5 +1,3 @@
-'use server'
-
 import mongoose, { HydratedDocument, InferSchemaType, Model, Schema } from 'mongoose'
 
 const mongoDoctorSchema = new Schema(

@@ -1,5 +1,3 @@
-'use server'
-
 import { HydratedDocument, InferSchemaType, Model, Schema, models, model } from 'mongoose'
 
 const mongoAppointmentSchema = new Schema({
@@ -36,5 +34,5 @@ const mongoAppointmentSchema = new Schema({
 export type Appointment = InferSchemaType<typeof mongoAppointmentSchema>
 export type AppointmentDoc = HydratedDocument<Appointment>
 
-const AppointmentModel = (models.Patients as Model<Appointment>) || model('Appointments', mongoAppointmentSchema)
+const AppointmentModel = (models.Appointments as Model<Appointment>) || model('Appointments', mongoAppointmentSchema)
 export default AppointmentModel

@@ -109,8 +109,8 @@ export const doctorSchema = z.object({
 export const analysesSchema = z.object({
   _id: z.string(),
   patientId: z.string(),
-  analysisName: z.string(),
-  date: z.date(),
+  analysisName: z.string('validation.analysisNameRequired'),
+  date: z.date('validation.analysisDateRequired'),
   description: z.string().optional(),
   fileName: z.string().optional(),
   createdAt: z.date(),
@@ -279,7 +279,7 @@ export const doctorSignUpFormValuesSchema = z
       .min(8, 'validation.passwordMinLength')
       .max(20, 'validation.passwordMaxLength'),
     verificationCode: z.string().nonempty('validation.verificationCodeRequired'),
-    position: z.string().nonempty('pvalidation.ositionRequired'),
+    position: z.string().nonempty('validation.positionRequired'),
     phone: z.string().nonempty('validation.phoneRequired')
   })
   .superRefine(({ password, confirmPassword, verificationCode }, ctx) => {

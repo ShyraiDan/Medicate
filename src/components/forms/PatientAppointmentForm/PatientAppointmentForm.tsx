@@ -75,22 +75,13 @@ export const PatientAppointmentForm = ({ appointment }: AppointmentFormProps) =>
     }
   })
 
-  // const { data: doctors } = useSWR<Doctor[]>(
-  //   watch('specialty') ? `/api/searchTerms/doctor?search=${encodeURIComponent(watch('specialty'))}` : null,
-  //   fetcher,
-  //   {
-  //     shouldRetryOnError: false,
-  //     revalidateOnFocus: false,
-  //     revalidateOnReconnect: false,
-  //     refreshWhenHidden: false,
-  //     refreshWhenOffline: false
-  //   }
-  // )
-
   const { data: doctors } = useSearchDoctorQuery(watch('specialty'))
 
   const { mutateAsync: createAppointment } = useCreateAppointmentMutation(session?.user?.id || '')
-  const { mutateAsync: updateAppointment } = useUpdateAppointmentMutation(session?.user?.id || '')
+  const { mutateAsync: updateAppointment } = useUpdateAppointmentMutation(
+    session?.user?.id || '',
+    appointment?._id || ''
+  )
 
   const doctorOptions = useMemo(() => {
     return doctors?.map((doctor: Doctor) => ({ value: doctor._id, label: doctor.doctorName })) || []
@@ -116,6 +107,7 @@ export const PatientAppointmentForm = ({ appointment }: AppointmentFormProps) =>
 
       const result = await updateAppointment({
         patientId: session.user.id,
+        appointmentId: appointment._id,
         data: editAppointment
       })
 
@@ -126,7 +118,7 @@ export const PatientAppointmentForm = ({ appointment }: AppointmentFormProps) =>
 
         // router.push(`/appointments/${result.}`)
       } else {
-        toast.success(t('notifications.visitUpdateError'))
+        toast.error(t('notifications.visitUpdateError'))
       }
     } else {
       const newAppointment: PatientCreateAppointmentFormValuesDto = {

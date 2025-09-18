@@ -107,6 +107,10 @@ export const createPatientAppointment = async (
       ...data
     })
 
+    if (!appointment) {
+      throw new Error('Update failed')
+    }
+
     return appointment
   } catch (error) {
     console.error('Error: ', error)
@@ -117,6 +121,7 @@ export const createPatientAppointment = async (
 // TODO: Test this endpoint
 export const updatePatientAppointment = async (
   patientId: string,
+  appointmentId: string,
   data: PatientEditAppointmentFormValuesDto
 ): Promise<InferSchemaType<PatientAppointment>> => {
   const session = await auth()
@@ -129,7 +134,7 @@ export const updatePatientAppointment = async (
     await connectMongoDB()
 
     const appointment = await AppointmentModel.findOneAndUpdate(
-      { _id: data._id },
+      { _id: appointmentId },
       {
         ...data
       }

@@ -1,5 +1,3 @@
-'use server'
-
 import { HydratedDocument, InferSchemaType, Model, Schema, models, model } from 'mongoose'
 
 const mongoPatientSchema = new Schema(

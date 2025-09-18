@@ -1,8 +1,13 @@
+'use client'
+
 import { format } from 'date-fns'
 import { enUS } from 'date-fns/locale'
 import { Pencil } from 'lucide-react'
-import { getTranslations } from 'next-intl/server'
+import { notFound, useParams } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 
+import { useGetSingleAnalysisQuery } from '@/client/analysis'
 import { AttachmentPreviewModal } from '@/components/modals/AttachmentPreviewModal/AttachmentPreviewModal'
 import { PageHeading } from '@/components/PageHeading/PageHeading'
 import { SkeletonText } from '@/components/skeletons/SkeletonText'
@@ -10,21 +15,21 @@ import { Container } from '@/components/ui/container'
 import { Separator } from '@/components/ui/separator'
 import { StyledLinkButton } from '@/components/ui/styledLinkButton'
 import { H2, H4, P } from '@/components/ui/typography'
-import { mockedAnalyses } from '@/mocks/mockedAnalyses'
-import { SupportedLocales } from '@/shared/types'
 import { dateLocaleMap } from '@/utils/dateLocaleMap'
 
-interface SingleAnalysisPageProps {
-  params: Promise<{ appointmentId: string; locale: SupportedLocales }>
-}
+const SingleAnalysisPage = () => {
+  const t = useTranslations('page')
+  const { data: session } = useSession()
+  const params = useParams<{ locale: string; analysisId: string }>()
+  const { locale, analysisId } = params
 
-const SingleAnalysisPage = async ({ params }: SingleAnalysisPageProps) => {
-  const t = await getTranslations('page')
-  const { locale } = await params
-  const analyses = mockedAnalyses[0]
-  const isLoading = true
+  const { data: analyses, isLoading } = useGetSingleAnalysisQuery(session?.user.id || '', analysisId)
 
   const dateLocale = dateLocaleMap[locale] ?? enUS
+
+  if (!analyses && !isLoading) {
+    notFound()
+  }
 
   return (
     <>
@@ -36,17 +41,17 @@ const SingleAnalysisPage = async ({ params }: SingleAnalysisPageProps) => {
         )}
 
         <div className='flex items-center w-full justify-between'>
-          {isLoading ? (
+          {isLoading || !analyses ? (
             <SkeletonText className='h-4 mb-1 w-[240px] bg-white opacity-10' />
           ) : (
             <P className='text-white'>
               {t('singleAnalysisPage.analysisDate')}{' '}
-              <span className='capitalize'>{format(analyses?.date, 'MMM dd, yyyy HH:mm', { locale: dateLocale })}</span>
+              <span className='capitalize'>{format(analyses.date, 'MMM dd, yyyy HH:mm', { locale: dateLocale })}</span>
             </P>
           )}
 
           <div className='flex gap-4 text-white'>
-            <StyledLinkButton variant='icon' href={`/analyses/${analyses._id}/edit`}>
+            <StyledLinkButton variant='icon' href={`/analyses/${analyses?._id}/edit`}>
               <Pencil size={16} />
             </StyledLinkButton>
           </div>

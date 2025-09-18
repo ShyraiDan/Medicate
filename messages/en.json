@@ -472,7 +472,11 @@
       "visitCreateSuccess": "Visit created successfully",
       "visitUpdateSuccess": "Visit updated successfully",
       "visitCreateError": "Error creating visit",
-      "visitUpdateError": "Error updating visit"
+      "visitUpdateError": "Error updating visit",
+      "analysisCreateSuccess": "Analysis created successfully",
+      "analysisUpdateSuccess": "Analysis updated successfully",
+      "analysisCreateError": "Error creating analysis",
+      "analysisUpdateError": "Error updating analysis"
     },
     "validation": {
       "userExists": "User already exists",
@@ -495,7 +499,9 @@
       "startTimeRequired": "Date is required field",
       "doctorIdRequired": "Doctor is required field",
       "specialtyRequired": "Specialty is required field",
-      "startTimeHoursRequired": "Time is required field"
+      "startTimeHoursRequired": "Time is required field",
+      "analysisNameRequired": "Analysis name is required field",
+      "analysisDateRequired": "Analysis date is required field"
     }
   },
   "modals": {
